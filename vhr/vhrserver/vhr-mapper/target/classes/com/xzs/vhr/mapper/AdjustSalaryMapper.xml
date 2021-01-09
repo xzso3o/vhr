@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzs.vhr.mapper.AdjustSalaryMapper" >
+  <resultMap id="BaseResultMap" type="com.xzs.vhr.model.AdjustSalary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="asDate" property="asDate" jdbcType="DATE" />
+    <result column="beforeSalary" property="beforeSalary" jdbcType="INTEGER" />
+    <result column="afterSalary" property="afterSalary" jdbcType="INTEGER" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, eid, asDate, beforeSalary, afterSalary, reason, remark
+  </sql>
+
+  <select id="getAllAdjustSalaries" resultMap="BaseResultMap">
+    select * from adjustsalary
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from adjustsalary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from adjustsalary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xzs.vhr.model.AdjustSalary" >
+    insert into adjustsalary (id, eid, asDate, 
+      beforeSalary, afterSalary, reason, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{asDate,jdbcType=DATE}, 
+      #{beforeSalary,jdbcType=INTEGER}, #{afterSalary,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xzs.vhr.model.AdjustSalary" >
+    insert into adjustsalary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="asDate != null" >
+        asDate,
+      </if>
+      <if test="beforeSalary != null" >
+        beforeSalary,
+      </if>
+      <if test="afterSalary != null" >
+        afterSalary,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="asDate != null" >
+        #{asDate,jdbcType=DATE},
+      </if>
+      <if test="beforeSalary != null" >
+        #{beforeSalary,jdbcType=INTEGER},
+      </if>
+      <if test="afterSalary != null" >
+        #{afterSalary,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xzs.vhr.model.AdjustSalary" >
+    update adjustsalary
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="asDate != null" >
+        asDate = #{asDate,jdbcType=DATE},
+      </if>
+      <if test="beforeSalary != null" >
+        beforeSalary = #{beforeSalary,jdbcType=INTEGER},
+      </if>
+      <if test="afterSalary != null" >
+        afterSalary = #{afterSalary,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xzs.vhr.model.AdjustSalary" >
+    update adjustsalary
+    set eid = #{eid,jdbcType=INTEGER},
+      asDate = #{asDate,jdbcType=DATE},
+      beforeSalary = #{beforeSalary,jdbcType=INTEGER},
+      afterSalary = #{afterSalary,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
